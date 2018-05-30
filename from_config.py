@@ -7,28 +7,33 @@ import sys
 def main():
     # capture the config path from the run arguments
     # then process the json configuration fill
-    try:
-        args = get_args()
-        config = process_config(args.config)
+    args = get_args()
+    config = process_config(args.config)
 
-        # create the experiments dirs
-        create_dirs([config.callbacks.tensorboard_log_dir, config.callbacks.checkpoint_dir])
+    if hasattr(config,"comet_api_key"):
+        from comet_ml import Experiment
 
-        print('Create the data generator.')
-        data_loader = factory.create("data_loader."+config.data_loader.name)(config)
+    # create the experiments dirs
+    create_dirs([
+     config.callbacks.tensorboard_log_dir,
+     config.callbacks.checkpoint_dir,
+     config.preprocessor.data_dir])
 
-        print('Create the model.')
-        model = factory.create("models."+config.model.name)(config)
+    print('Creating the preprocessor.')
+    preprocessor = factory.create("preprocessors."+config.preprocessor.name)(config)
+    preprocessor.preprocess()
 
-        print('Create the trainer')
-        trainer = factory.create("trainers."+config.trainer.name)(model.model, data_loader.get_train_data(), config)
+    print('Create the data generator.')
+    data_loader = factory.create("data_loaders."+config.data_loader.name)(config)
 
-        print('Start training the model.')
-        trainer.train()
+    print('Create the model.')
+    model = factory.create("models."+config.model.name)(config)
 
-    except Exception as e:
-        print(e)
-        sys.exit(1)
+    print('Create the trainer')
+    trainer = factory.create("trainers."+config.trainer.name)(model.model, data_loader.get_train_data(), config)
+
+    print('Start training the model.')
+    trainer.train()
 
 if __name__ == '__main__':
     main()

@@ -2,6 +2,12 @@
   "exp": {
     "name": "conv_mnist_from_config"
   },
+  "preprocessor":{
+    "name": "simple_mnist_preprocessor.SimpleMnistPreprocessor",
+    "data_dir": "data",
+    "data_fmt": "{.preprocessor.data_name}",
+    "data_name": "mnist"
+  },
   "data_loader": {
     "name": "conv_mnist_data_loader.ConvMnistDataLoader"
   },
