@@ -4,9 +4,9 @@ import os
 from base.base_preprocessor import BasePreprocessor
 
 
-class SimpleMnistPreprocessor(BasePreprocessor):
+class MnistPreprocessor(BasePreprocessor):
     def __init__(self, config):
-        super(SimpleMnistPreprocessor, self).__init__(config)
+        super().__init__(config)
 
     def preprocess(self):
         data = mnist.load_data()

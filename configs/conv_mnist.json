@@ -3,13 +3,14 @@
     "name": "conv_mnist_from_config"
   },
   "preprocessor":{
-    "name": "simple_mnist_preprocessor.SimpleMnistPreprocessor",
+    "name": "mnist_preprocessor.MnistPreprocessor",
     "data_dir": "data",
     "data_fmt": "{.preprocessor.data_name}",
     "data_name": "mnist"
   },
   "data_loader": {
-    "name": "conv_mnist_data_loader.ConvMnistDataLoader"
+    "name": "mnist_data_loader.MnistDataLoader",
+    "dim": 4
   },
   "model":{
     "name": "conv_mnist_model.ConvMnistModel",
@@ -27,7 +28,7 @@
     "checkpoint_monitor": "val_loss",
     "checkpoint_mode": "min",
     "checkpoint_save_best_only": true,
-   "checkpoint_save_weights_only": true,
+    "checkpoint_save_weights_only": true,
     "checkpoint_verbose": true,
     "tensorboard_write_graph": true
   }

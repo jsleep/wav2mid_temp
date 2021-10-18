@@ -10,8 +10,8 @@ def main():
     args = get_args()
     config = process_config(args.config)
 
-    if hasattr(config,"comet_api_key"):
-        from comet_ml import Experiment
+    # if hasattr(config,"comet_api_key"):
+    #     from comet_ml import Experiment
 
     # create the experiments dirs
     create_dirs([
@@ -23,17 +23,17 @@ def main():
     preprocessor = factory.create("preprocessors."+config.preprocessor.name)(config)
     preprocessor.preprocess()
 
-    print('Create the data generator.')
-    data_loader = factory.create("data_loaders."+config.data_loader.name)(config)
+    # print('Create the data generator.')
+    # data_loader = factory.create("data_loaders."+config.data_loader.name)(config)
 
-    print('Create the model.')
-    model = factory.create("models."+config.model.name)(config)
+    # print('Create the model.')
+    # model = factory.create("models."+config.model.name)(config)
 
-    print('Create the trainer')
-    trainer = factory.create("trainers."+config.trainer.name)(model.model, data_loader.get_train_data(), config)
+    # print('Create the trainer')
+    # trainer = factory.create("trainers."+config.trainer.name)(model.model, data_loader.get_train_data(), config)
 
-    print('Start training the model.')
-    trainer.train()
+    # print('Start training the model.')
+    # trainer.train()
 
 if __name__ == '__main__':
     main()

@@ -1,20 +1,18 @@
 {
   "exp": {
-    "name": "simple_mnist_from_config"
-  },
-  "data_loader": {
-    "name": "simple_mnist_data_loader.SimpleMnistDataLoader"
+    "name": "wav2mid"
   },
   "preprocessor":{
-    "name": "simple_mnist_preprocessor.SimpleMnistPreprocessor",
-    "data_dir": "data",
-    "data_fmt": "{.preprocessor.data_name}",
-    "data_name": "mnist"
+    "name": "wav2mid_preprocessor.Wav2MidPreprocessor",
+    "data_dir": "data/wav2mid"
+  },
+  "data_loader": {
+    "name": "mnist_data_loader.MnistDataLoader"
   },
   "model":{
-    "name": "simple_mnist_model.SimpleMnistModel",
+    "name": "conv_mnist_model.ConvMnistModel",
     "learning_rate": 0.001,
-    "optimizer": "adam"
+    "optimizer": "adadelta"
   },
   "trainer":{
     "name": "simple_mnist_trainer.SimpleMnistModelTrainer",
@@ -27,7 +25,7 @@
     "checkpoint_monitor": "val_loss",
     "checkpoint_mode": "min",
     "checkpoint_save_best_only": true,
-   "checkpoint_save_weights_only": true,
+    "checkpoint_save_weights_only": true,
     "checkpoint_verbose": true,
     "tensorboard_write_graph": true
   }

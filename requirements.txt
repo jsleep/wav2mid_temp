@@ -1,0 +1,4 @@
+keras
+dotmap
+librosa
+pretty_midi
